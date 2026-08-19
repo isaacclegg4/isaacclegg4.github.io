@@ -575,20 +575,11 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 	 * mouseY, renderPartialTicks
 	 */
 	public void drawScreen(int i, int j, float f) {
-		GlStateManager.disableAlpha();
-		if (enableBlur) {
-			this.renderSkybox(i, j, f);
-		} else {
-			this.drawPanorama(i, j, f);
-		}
-		GlStateManager.enableAlpha();
+		this.drawDefaultBackground();
+
 		short short1 = 274;
 		int k = this.width / 2 - short1 / 2;
 		byte b0 = 30;
-		if (enableBlur) {
-			this.drawGradientRect(0, 0, this.width, this.height, -2130706433, 16777215);
-			this.drawGradientRect(0, 0, this.width, this.height, 0, Integer.MIN_VALUE);
-		}
 		this.mc.getTextureManager().bindTexture(minecraftTitleTextures);
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		boolean minc = (double) this.updateCounter < 1.0E-4D;
