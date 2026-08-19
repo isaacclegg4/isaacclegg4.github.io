@@ -309,29 +309,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 		this.mc.func_181537_a(false);
 	}
 
-	/**+
-	 * Adds Singleplayer and Multiplayer buttons on Main Menu for
-	 * players who have bought the game.
-	 */
-	private void addSingleplayerMultiplayerButtons(int parInt1, int parInt2) {
-		this.buttonList
-				.add(new GuiButton(1, this.width / 2 - 100, parInt1, I18n.format("menu.singleplayer", new Object[0])));
-		this.buttonList.add(new GuiButton(2, this.width / 2 - 100, parInt1 + parInt2 * 1,
-				I18n.format("menu.multiplayer", new Object[0])));
-		if (EaglercraftVersion.mainMenuEnableGithubButton) {
-			this.buttonList.add(
-					new GuiButton(14, this.width / 2 - 100, parInt1 + parInt2 * 2, I18n.format("menu.forkOnGitlab")));
-		} else {
-			if (EagRuntime.getConfiguration().isEnableDownloadOfflineButton()
-					&& (EagRuntime.getConfiguration().getDownloadOfflineButtonLink() != null
-							|| (!EagRuntime.isOfflineDownloadURL() && UpdateService.supported()
-									&& UpdateService.getClientSignatureData() != null))) {
-				this.buttonList.add(downloadOfflineButton = new GuiButton(15, this.width / 2 - 100,
-						parInt1 + parInt2 * 2, I18n.format("update.downloadOffline")));
-				downloadOfflineButton.enabled = !UpdateService.shouldDisableDownloadButton();
-			}
-		}
-	}
+-
 
 	/**+
 	 * Adds Demo buttons on Main Menu for players who are playing
