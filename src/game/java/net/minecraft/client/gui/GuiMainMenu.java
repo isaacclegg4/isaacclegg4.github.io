@@ -575,7 +575,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 	 * mouseY, renderPartialTicks
 	 */
 	public void drawScreen(int i, int j, float f) {
-		this.drawDefaultBackground();
+		this.drawBackground(0);
 
 		short short1 = 274;
 		int k = this.width / 2 - short1 / 2;
