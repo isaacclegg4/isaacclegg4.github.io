@@ -157,7 +157,7 @@ public class ServerSelectionList extends GuiListExtended {
 			switch (this.owner.ticksOpened / 3 % 4) {
 			case 0:
 			default:
-				var6 = "O o o";
+				var6 = "O . o";
 				break;
 
 			case 1:
