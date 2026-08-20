@@ -309,7 +309,29 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 		this.mc.func_181537_a(false);
 	}
 
--
+	/**+
+	 * Adds Singleplayer and Multiplayer buttons on Main Menu for
+	 * players who have bought the game.
+	 */
+	private void addSingleplayerMultiplayerButtons(int parInt1, int parInt2) {
+		this.buttonList
+				.add(new GuiButton(1, this.width / 2 - 100, parInt1, I18n.format("menu.singleplayer", new Object[0])));
+		this.buttonList.add(new GuiButton(2, this.width / 2 - 100, parInt1 + parInt2 * 1,
+				I18n.format("menu.multiplayer", new Object[0])));
+		if (EaglercraftVersion.mainMenuEnableGithubButton) {
+			this.buttonList.add(
+					new GuiButton(14, this.width / 2 - 100, parInt1 + parInt2 * 2, I18n.format("menu.forkOnGitlab")));
+		} else {
+			if (EagRuntime.getConfiguration().isEnableDownloadOfflineButton()
+					&& (EagRuntime.getConfiguration().getDownloadOfflineButtonLink() != null
+							|| (!EagRuntime.isOfflineDownloadURL() && UpdateService.supported()
+									&& UpdateService.getClientSignatureData() != null))) {
+				this.buttonList.add(downloadOfflineButton = new GuiButton(15, this.width / 2 - 100,
+						parInt1 + parInt2 * 2, I18n.format("update.downloadOffline")));
+				downloadOfflineButton.enabled = !UpdateService.shouldDisableDownloadButton();
+			}
+		}
+	}
 
 	/**+
 	 * Adds Demo buttons on Main Menu for players who are playing
@@ -514,7 +536,31 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 	 * Renders the skybox in the main menu
 	 */
 	private void renderSkybox(int parInt1, int parInt2, float parFloat1) {
-		this.drawdefaultbackground();
+		viewportTexture.bindFramebuffer();
+		GlStateManager.viewport(0, 0, 256, 256);
+		GlStateManager.clearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		GlStateManager.clear(GL_COLOR_BUFFER_BIT);
+		this.drawPanorama(parInt1, parInt2, parFloat1);
+		viewportTexture2.bindFramebuffer();
+		GlStateManager.clearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		GlStateManager.clear(GL_COLOR_BUFFER_BIT);
+		this.mc.getTextureManager().bindTexture(backgroundTexture);
+		this.rotateAndBlurSkybox(parFloat1);
+		viewportTexture.bindFramebuffer();
+		this.mc.getTextureManager().bindTexture(backgroundTexture2);
+		this.rotateAndBlurSkybox(parFloat1);
+		viewportTexture2.bindFramebuffer();
+		this.mc.getTextureManager().bindTexture(backgroundTexture);
+		this.rotateAndBlurSkybox(parFloat1);
+		viewportTexture.bindFramebuffer();
+		this.mc.getTextureManager().bindTexture(backgroundTexture2);
+		this.rotateAndBlurSkybox(parFloat1);
+		viewportTexture2.bindFramebuffer();
+		this.mc.getTextureManager().bindTexture(backgroundTexture);
+		this.rotateAndBlurSkybox(parFloat1);
+		viewportTexture.bindFramebuffer();
+		this.mc.getTextureManager().bindTexture(backgroundTexture2);
+		this.rotateAndBlurSkybox(parFloat1);
 
 		// Notch fucked up, the last iteration is not necessary, in the vanilla renderer
 		// it is unintentionally discarded and the previous iteration is used
@@ -551,11 +597,14 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 	 * mouseY, renderPartialTicks
 	 */
 	public void drawScreen(int i, int j, float f) {
-		this.drawBackground(0);
-
+		 this.drawDefaultBackground();
 		short short1 = 274;
 		int k = this.width / 2 - short1 / 2;
 		byte b0 = 30;
+		if (enableBlur) {
+			this.drawGradientRect(0, 0, this.width, this.height, -2130706433, 16777215);
+			this.drawGradientRect(0, 0, this.width, this.height, 0, Integer.MIN_VALUE);
+		}
 		this.mc.getTextureManager().bindTexture(minecraftTitleTextures);
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		boolean minc = (double) this.updateCounter < 1.0E-4D;
