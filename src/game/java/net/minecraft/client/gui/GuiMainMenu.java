@@ -536,31 +536,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 	 * Renders the skybox in the main menu
 	 */
 	private void renderSkybox(int parInt1, int parInt2, float parFloat1) {
-		viewportTexture.bindFramebuffer();
-		GlStateManager.viewport(0, 0, 256, 256);
-		GlStateManager.clearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		GlStateManager.clear(GL_COLOR_BUFFER_BIT);
-		this.drawPanorama(parInt1, parInt2, parFloat1);
-		viewportTexture2.bindFramebuffer();
-		GlStateManager.clearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		GlStateManager.clear(GL_COLOR_BUFFER_BIT);
-		this.mc.getTextureManager().bindTexture(backgroundTexture);
-		this.rotateAndBlurSkybox(parFloat1);
-		viewportTexture.bindFramebuffer();
-		this.mc.getTextureManager().bindTexture(backgroundTexture2);
-		this.rotateAndBlurSkybox(parFloat1);
-		viewportTexture2.bindFramebuffer();
-		this.mc.getTextureManager().bindTexture(backgroundTexture);
-		this.rotateAndBlurSkybox(parFloat1);
-		viewportTexture.bindFramebuffer();
-		this.mc.getTextureManager().bindTexture(backgroundTexture2);
-		this.rotateAndBlurSkybox(parFloat1);
-		viewportTexture2.bindFramebuffer();
-		this.mc.getTextureManager().bindTexture(backgroundTexture);
-		this.rotateAndBlurSkybox(parFloat1);
-		viewportTexture.bindFramebuffer();
-		this.mc.getTextureManager().bindTexture(backgroundTexture2);
-		this.rotateAndBlurSkybox(parFloat1);
+		this.drawDefaultBackground();
 
 		// Notch fucked up, the last iteration is not necessary, in the vanilla renderer
 		// it is unintentionally discarded and the previous iteration is used
@@ -597,7 +573,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 	 * mouseY, renderPartialTicks
 	 */
 	public void drawScreen(int i, int j, float f) {
-		 this.drawDefaultBackground();
+		this.drawDefaultBackground();
 		short short1 = 274;
 		int k = this.width / 2 - short1 / 2;
 		byte b0 = 30;
